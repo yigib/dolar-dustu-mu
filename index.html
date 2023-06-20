@@ -6,20 +6,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <title>Dolar Düştü Mü?</title>
         <style>
-        .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        font-size: 25vw;
-        }
+@media (prefers-color-scheme: dark) {
+  body{
+    background-color: black;
+    color: gray;
+  }
+}
+.center {
+margin: 0;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 25vw;
+}
+.footer {
+left: 10%;
+bottom: 0;
+position: fixed;
+text-align: center;
+font-size: 3vw;
+}
+@media (min-aspect-ratio: 1) {
+  .footer {
+    font-size: 1.5em;
+  }
+}
         </style>
     </head>
     
     <body>
         <h1 class="center">Hayır</h1>
+          <footer class="footer">
+            <p>
+            Bir hafta öncesi ile karşılaştırılınca USD/TRY kuru. <br>
+            Son güncellenme:
+2023-06-20
+            
+            </p>
+          </footer> 
+          <!--
         <script>
             const text = document.querySelector("h1");
             function changeText(){
@@ -27,5 +53,6 @@
             }
             setInterval(changeText, 500);
         </script>
+        -->
     </body>
 </html>
