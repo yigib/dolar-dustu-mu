@@ -5,4 +5,4 @@ Updates everyday at 10:00 UTC.
 
 This application uses GitHub Actions to update an HTML file.
 This file is also served on GitHub Pages, so this is entirely hosted by GitHub.
-Link: [https://yigib.github.io/dolar-dustu-mu/]
+Link: https://yigib.github.io/dolar-dustu-mu/
