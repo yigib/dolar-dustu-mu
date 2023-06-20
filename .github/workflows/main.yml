@@ -1,0 +1,44 @@
+on:
+  schedule:
+    - cron: '0 10 * * *'
+
+jobs:
+  update-index-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install jq to parse JSON
+        run: sudo apt install jq -y
+      - name: Get new data from API
+        run: curl 
+      - name: Push new index.html
+        run: |
+          DATE_MONTH_AGO=$(date -d "1 month ago" +"%F")
+          
+          QUERY_MONTH_AGO=$(curl "http://apilayer.net/api/historical?access_key=$ACCESS_KEY&date=$DATE_MONTH_AGO&currencies=TRY&source=USD")
+          QUERY_CURRENT=$(curl "http://apilayer.net/api/live?access_key=$ACCESS_KEY&currencies=TRY&source=USD")
+
+          RATE_MONTH_AGO=$(echo $QUERY_MONTH_AGO | jq .quotes.USDTRY)
+          RATE_CURRENT=$(echo $QUERY_CURRENT | jq .quotes.USDTRY )
+
+          # easiest way to update the entire file
+          rm index.html
+          if [ "echo $RATE_CURRENT'<'$RATE_MONTH_AGO | bc -l" ]; then 
+              cp hayir.html index.html
+          else
+              cp evet.html index.html
+          fi
+
+          DATE_TODAY=$(date +"%F")
+          # add date to line 44 (hacky solution)
+          ex index.html <<eof
+          44 insert
+          $DATE_TODAY
+          .
+          xit
+          eof
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add index.html
+          git commit -m "Auto generate"
+          git push
