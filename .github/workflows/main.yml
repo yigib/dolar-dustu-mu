@@ -31,9 +31,10 @@ jobs:
           fi
 
           DATE_TODAY=$(date +"%F")
-          # add date to line 44 (hacky solution)
+          # add date to line 49 (hacky solution)
+          # TODO: Use sed here with smt like s/DATE_TODAY/$DATE_TODAY
           ex index.html <<eof
-          44 insert
+          49 insert
           $DATE_TODAY
           .
           xit
